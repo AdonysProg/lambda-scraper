@@ -29,7 +29,14 @@ const serverlessConfiguration: AWS = {
       handler: georgiaScraper.handler,
       memorySize: 1600,
       timeout: 60,
-      events: georgiaScraper.events,
+      events: [
+        {
+          http: {
+            method: 'get',
+            path: 'georgiaScrapper/{drawDate}/{drawName}/{drawType}',
+          },
+        },
+      ],
     },
   },
 }
