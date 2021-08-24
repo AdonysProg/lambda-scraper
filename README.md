@@ -22,7 +22,19 @@ Depending on your preferred package manager, follow the instructions below to de
 
 ## Test your lambda
 
-- requesting any other path than `/georgiaScraper` with any other method than `GET` will result in API Gateway returning a `403` HTTP error code
+- requesting any other path than `/georgiaScrapper/{drawDate}/{drawName}/{drawType}` with any other method than `GET` will result in API Gateway returning a `403` HTTP error code
+  
+
+## Example Draws names
+
+- cash4
+- cash3
+
+## Example Draw types
+
+- midday
+- evening
+- night
 
 > :warning: As is, this template, once deployed, opens a **public** endpoint within your AWS account resources. Anybody with the URL can actively execute the API Gateway endpoint and the corresponding lambda. You should protect this endpoint with the authentication method of your choice.
 
