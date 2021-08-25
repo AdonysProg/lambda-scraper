@@ -1,1 +1,1 @@
-export { default as georgiaScrapper } from './georgiaScraper';
+export { default as georgiaScraper } from './georgiaScraper'

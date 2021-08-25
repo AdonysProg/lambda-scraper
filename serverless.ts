@@ -28,15 +28,15 @@ const serverlessConfiguration: AWS = {
     georgiaScraper: {
       handler: georgiaScraper.handler,
       memorySize: 1600,
+      // layers: [
+      //   {
+      //     'Fn::Sub': [
+      //       'arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:24',
+      //     ],
+      //   },
+      // ],
       timeout: 60,
-      events: [
-        {
-          http: {
-            method: 'get',
-            path: 'georgiaScrapper/{drawDate}/{drawName}/{drawType}',
-          },
-        },
-      ],
+      events: georgiaScraper.events,
     },
   },
 }

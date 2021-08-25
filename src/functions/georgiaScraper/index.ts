@@ -6,8 +6,16 @@ export default {
     {
       http: {
         method: 'get',
-        path: 'georgiaScrapper/{drawDate}/{drawName}/{drawType}',
+        path: 'georgiaScraper/{drawDate}/{drawName}/{drawTime}',
       },
     },
+    // {
+    //   schedule: {
+    //     rate: 'rate(1 minute)',
+    //     enabled: true,
+    //     name: 'Georgia Scraper',
+    //     description: 'Hello there',
+    //   },
+    // },
   ],
 }

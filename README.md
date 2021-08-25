@@ -22,7 +22,7 @@ Depending on your preferred package manager, follow the instructions below to de
 
 ## Test your lambda
 
-- requesting any other path than `/georgiaScrapper/{drawDate}/{drawName}/{drawType}` with any other method than `GET` will result in API Gateway returning a `403` HTTP error code
+- requesting any other path than `/georgiaScraper/{drawDate}/{drawName}/{drawType}` with any other method than `GET` will result in API Gateway returning a `403` HTTP error code
   
 
 ## Example Draws names

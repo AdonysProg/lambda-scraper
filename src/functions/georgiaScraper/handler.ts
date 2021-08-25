@@ -5,7 +5,7 @@ import { formatJSONResponse } from '@libs/apiGateway'
 import { middyfy } from '@libs/lambda'
 import chromium from 'chrome-aws-lambda'
 
-interface Result {
+export interface Result {
   date: string
   drawTime: string
   numbers: string
@@ -15,7 +15,7 @@ const georgiaScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
   event
 ) => {
   let browser
-  const { drawDate, gameName, drawTime } = event.pathParameters
+  const { drawDate, drawName, drawTime } = event.pathParameters
   const date = drawDate.split('-')
   try {
     browser = await chromium.puppeteer.launch({
@@ -26,18 +26,14 @@ const georgiaScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
       executablePath: await chromium.executablePath,
     })
     const page = await browser.newPage()
-    await page.setViewport({
-      width: 1080,
-      height: 1080,
-    })
     await page.goto(`https://www.galottery.com/en-us/winning-numbers.html`)
     console.log(`Scrapping ${page.url()}`)
     await page.select('#searchByDateYear', date[0])
     await page.select('#searchByDateMonth', date[1])
     await page.select('#searchByDateDay', date[2])
-    await page.select('#gameSelect', gameName.toUpperCase())
+    await page.select('#gameSelect', drawName.toUpperCase())
     await page.click('button[class="btn btn-primary btn-block"]')
-    await page.waitForSelector(`#${gameName}`, {
+    await page.waitForSelector(`#${drawName}`, {
       timeout: 1000,
     })
     const result: Result[] = await page.$$eval(
@@ -61,10 +57,8 @@ const georgiaScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
       },
       drawTime
     )
-    return formatJSONResponse({
-      result,
-      event,
-    })
+    await browser.close()
+    return formatJSONResponse(result)
   } catch (err) {
     console.log(err)
     return {

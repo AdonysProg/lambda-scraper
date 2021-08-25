@@ -4,7 +4,8 @@
   "description": "Lambda Serverless scraping tool",
   "main": "serverless.ts",
   "scripts": {
-    "test": "sls invoke local -f georgiaScraper -p src/functions/georgiaScraper/mock.json"
+    "test": "sls invoke local -f georgiaScraper -p src/functions/georgiaScraper/mock.json",
+    "dev": "sls offline"
   },
   "engines": {
     "node": ">=14.15.0"
