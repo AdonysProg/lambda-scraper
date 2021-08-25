@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript'
 
 import georgiaScraper from '@functions/georgiaScraper'
+import newJerseyScraper from '@functions/newJerseyScraper'
 
 const serverlessConfiguration: AWS = {
   service: 'lambda-scraper',
@@ -37,6 +38,12 @@ const serverlessConfiguration: AWS = {
       // ],
       timeout: 60,
       events: georgiaScraper.events,
+    },
+    newJerseyScraper: {
+      handler: newJerseyScraper.handler,
+      memorySize: 1600,
+      timeout: 60,
+      events: newJerseyScraper.events,
     },
   },
 }

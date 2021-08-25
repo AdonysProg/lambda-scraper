@@ -5,6 +5,7 @@ import type {
   Handler,
 } from 'aws-lambda'
 import type { FromSchema } from 'json-schema-to-ts'
+import log from 'npmlog'
 
 type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & {
   body: FromSchema<S>
@@ -19,6 +20,7 @@ export const formatJSONResponse = (response: Result[]) => {
     (prev, value) => Object.assign(prev, value),
     { numbers: '' }
   )
+  log.info('response', `the result is ${numbers}`)
   return {
     statusCode: 200,
     body: JSON.stringify(numbers),

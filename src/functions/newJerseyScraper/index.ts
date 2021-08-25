@@ -6,14 +6,14 @@ export default {
     {
       http: {
         method: 'get',
-        path: 'georgiaScraper/{drawDate}/{drawName}/{drawTime}',
+        path: 'newJerseyScraper/{drawDate}/{drawName}/{drawTime}',
       },
     },
     // {
     //   schedule: {
     //     rate: 'rate(1 minute)',
     //     enabled: true,
-    //     name: 'Georgia Scraper',
+    //     name: 'New Jersey Scraper',
     //   },
     // },
   ],

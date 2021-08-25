@@ -4,7 +4,7 @@ import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway'
 import { formatJSONResponse } from '@libs/apiGateway'
 import { middyfy } from '@libs/lambda'
 import chromium from 'chrome-aws-lambda'
-
+import log from 'npmlog'
 export interface Result {
   date: string
   drawTime: string
@@ -27,15 +27,19 @@ const georgiaScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
     })
     const page = await browser.newPage()
     await page.goto(`https://www.galottery.com/en-us/winning-numbers.html`)
-    console.log(`Scrapping ${page.url()}`)
+    log.info('scraper', `navigating to ${page.url()}`)
     await page.select('#searchByDateYear', date[0])
     await page.select('#searchByDateMonth', date[1])
     await page.select('#searchByDateDay', date[2])
+    log.info('scraper', 'selected date in search panel')
     await page.select('#gameSelect', drawName.toUpperCase())
+    log.info('scraper', 'selected game type in search panel')
     await page.click('button[class="btn btn-primary btn-block"]')
+    log.info('scraper', 'searching for winning numbers')
     await page.waitForSelector(`#${drawName}`, {
       timeout: 1000,
     })
+    log.info('scraper', 'scraping the table')
     const result: Result[] = await page.$$eval(
       'table > tbody > tr',
       (tds: any, drawTime: string) => {
@@ -57,10 +61,11 @@ const georgiaScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
       },
       drawTime
     )
+    log.info('scraper', 'closing the browser')
     await browser.close()
     return formatJSONResponse(result)
   } catch (err) {
-    console.log(err)
+    log.error('scraper', err)
     return {
       statusCode: 502,
       body: JSON.stringify(err),
