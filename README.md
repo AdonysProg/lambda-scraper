@@ -1,4 +1,4 @@
-# Serverless - AWS Node.js Typescript
+# Puppeteer Serverless Lambda - AWS Node.js Typescript
 
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).
 
@@ -23,7 +23,7 @@ Depending on your preferred package manager, follow the instructions below to de
 ## Test your lambda
 
 - requesting any other path than `/georgiaScraper/{drawDate}/{drawName}/{drawType}` with any other method than `GET` will result in API Gateway returning a `403` HTTP error code
-  
+- run `yarn test` or `npm run test` to use the mock data against your lambda.
 
 ## Example Draws names
 
