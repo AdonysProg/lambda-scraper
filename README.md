@@ -52,7 +52,7 @@ Check the [sls invoke local command documentation](https://www.serverless.com/fr
 Copy and replace your `url` - found in Serverless `deploy` command output - and `name` parameter in the following `curl` command in your terminal or in Postman to test your newly deployed application.
 
 ```
-curl --location --request POST 'https://myApiEndpoint/dev/georgiaScraper/{drawDate}/{drawGame}/{drawType}'
+curl --location --request POST 'https://myApiEndpoint/dev/georgiaScraper/{drawDate}/{drawName}/{drawTime}'
 ```
 ### Project structure
 

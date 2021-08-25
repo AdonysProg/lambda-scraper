@@ -1,5 +1,5 @@
 node_modules
 .serverless
-.webpack,
+.webpack
 _warmup
 .vscode
