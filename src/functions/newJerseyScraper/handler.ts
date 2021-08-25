@@ -23,6 +23,7 @@ const newJerseyScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
     const gameNumber = parseInt(drawName.slice(-1))
     browser = await chromium.puppeteer.launch({
       args: [
+        ...chromium.args,
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
@@ -87,7 +88,6 @@ const newJerseyScraper: ValidatedEventAPIGatewayProxyEvent<any> = async (
       drawTime
     )
     log.info('scraper', 'closing the browser')
-    await page.close()
     await browser.close()
     return formatJSONResponse(result)
   } catch (err) {
